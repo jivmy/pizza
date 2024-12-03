@@ -6,7 +6,7 @@ Thanks for participating in our takehome exercise! Please dont hesitate to reach
 
 The instructions are in the app page, so you'll just need to clone and fire it up:
 
-1. Clone this repo to your local machine `git clone git@github.com:gamma-app/interview_gamma_1.git`
+1. Clone this repo to your local machine `git clone git@github.com:gamma-app/design-eng-takehome.git`
 2. Run `yarn install`
 3. Run `yarn start`
 4. Open http://localhost:3000/ to see your app.
