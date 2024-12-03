@@ -36,7 +36,7 @@ function App() {
         <Text>
           In a couple hours, we expect everyone will get some of the way through
           this prototype.{' '}
-          <strong>The prototype is just that — a prototype</strong>. If invited
+          <strong>The prototype is just that — a prototype</strong>. If invited
           to an on-site interview, you'll pair with us wherever you left off,
           because we'd much rather see how you work on a problem you're familiar
           with and have had time to think about than on some clever whiteboard
@@ -54,15 +54,11 @@ function App() {
         </Heading>
         <UnorderedList>
           <ListItem>
-            Try to spend only a few hours on this, but you'll have a week.
+            Try to spend only a few hours on this. You'll have a week to
+            complete it at the pace that works best for your schedule.
           </ListItem>
           <ListItem>
-            Just in case you were wondering, we won't use any of your work
-            anywhere, we'll keep it between us.
-          </ListItem>
-          <ListItem>
-            Index on fun and delight, when in doubt, make it more fun. You will
-            be graded on how delightful this is to use. Go wild.
+            Index on fun and delight — when in doubt, err on the wild side.
           </ListItem>
           <ListItem>
             It should still be usable — don't be boring…but don't get carried
@@ -74,12 +70,11 @@ function App() {
         </Heading>
         <OrderedList>
           <ListItem>
-            People should be able to choose a size, we offer Small, Medium, and
-            Monster.
+            People should be able to choose a size: Small, Medium, and Monster.
           </ListItem>
+          <ListItem>People should be able to add or remove toppings</ListItem>
           <ListItem>
-            People should be able to choose their toppings, sorry no ½ or ¼
-            toppings, gotta be the whole pie.
+            Toppings apply to the whole pie — sorry no ½ or ¼ toppings
           </ListItem>
           <ListItem>
             People should be able to checkout and start over. Fwiw, you don't
