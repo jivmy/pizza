@@ -24,7 +24,6 @@ function App() {
           my={12}
           w="32"
         />
-
         <Heading size="sm">Design Engineer Take-home Project</Heading>
         <Heading size="xl">Pepperoni Planet Pizza Configurator</Heading>
         <Text fontSize="lg">
@@ -46,7 +45,7 @@ function App() {
         <Heading as="h4" size="md">
           Your task
         </Heading>
-        <Text className="paragraph" fontWeight="bold">
+        <Text className="paragraph">
           Imagine and prototype a fun and delightful pizza configuration screen.
         </Text>
         <Heading as="h4" size="md">
@@ -77,9 +76,8 @@ function App() {
             Toppings apply to the whole pie — sorry no ½ or ¼ toppings
           </ListItem>
           <ListItem>
-            People should be able to checkout and start over. Fwiw, you don't
-            have to figure out anything beyond clicking the checkout button (it
-            doesn't have to work).
+            People should be able to finish and start over, but the finish
+            button doesn't need to do anything.
           </ListItem>
         </OrderedList>
         <Heading as="h4" size="md">
@@ -100,8 +98,9 @@ function App() {
             </Link>
           </ListItem>
           <ListItem>
-            The backend engineering team has provided a data-model for you. You
-            can find at <Code>/src/data.js</Code>
+            The backend engineering team has provided the data for the toppings
+            for you. You can find at the <Code>/src/data.js</Code> file. Try and
+            use this data to render the toppings.
           </ListItem>
         </UnorderedList>
         <Heading as="h4" size="md">
@@ -126,6 +125,16 @@ function App() {
           mx="auto"
           my={12}
           w="12"
+          // Spin the image on click (FUNFUNFUN)
+          onClick={e => {
+            e.target.style.transition = 'transform 0.5s';
+            e.target.style.transform = 'rotate(360deg)';
+            // Then reset the image
+            setTimeout(() => {
+              e.target.style.transition = 'none';
+              e.target.style.transform = 'rotate(0deg)';
+            }, 500);
+          }}
         />
       </Stack>
     </Container>
