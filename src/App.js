@@ -149,8 +149,8 @@ function App() {
             src={`./images/${size === 'monster' ? "logo_2.svg" : "logo.svg"}`}
             alt="Pepperoni Planet Logo"
             mx="auto"
-            w={{ base: "20", lg: "32" }}
-            h={{ base: "20", lg: "32" }}
+            w={{ base: "12", lg: "32" }}
+            h={{ base: "12", lg: "32" }}
             filter={size === 'monster' ? "brightness(0) invert(1)" : "none"}
             transition="all 0.2s ease"
             objectFit="contain"
