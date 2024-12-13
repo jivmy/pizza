@@ -1,15 +1,16 @@
 import { motion } from 'framer-motion';
 import { Box, Image } from '@chakra-ui/react';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { PIZZA_SIZES, PIZZA_DIMENSIONS, SCATTER_RADIUS } from '../constants';
 
-const getRandomPosition = (maxRadius) => {
+const getRandomPosition = (maxRadius, isMobile) => {
   const angle = Math.random() * Math.PI * 2;
-  const r = Math.sqrt(Math.random()) * maxRadius;
+  const adjustedRadius = isMobile ? maxRadius * 0.6 : maxRadius;
+  const r = Math.sqrt(Math.random()) * adjustedRadius;
   
   return {
-    x: 50 + r * Math.cos(angle),
-    y: 50 + r * Math.sin(angle),
+    x: 50 + (r * Math.cos(angle)),
+    y: 50 + (r * Math.sin(angle)),
     rotate: Math.random() * 360
   };
 };
@@ -17,28 +18,59 @@ const getRandomPosition = (maxRadius) => {
 function PizzaVisualizer({ size, toppings }) {
   const scale = PIZZA_DIMENSIONS[size].scale;
   const toppingPositionsRef = useRef({});
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const containerRef = useRef(null);
   
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  useEffect(() => {
+    // Reset topping positions when mobile state changes or size changes
+    toppingPositionsRef.current = {};
+  }, [isMobile, size]);
+
   toppings.forEach(topping => {
     if (!toppingPositionsRef.current[topping.title]) {
       const count = size === 'monster' ? 8 : size === 'medium' ? 6 : 4;
       toppingPositionsRef.current[topping.title] = Array.from(
         { length: count }, 
-        () => getRandomPosition(SCATTER_RADIUS[size])
+        () => getRandomPosition(SCATTER_RADIUS[size], isMobile)
       );
     }
   });
 
   return (
     <Box 
+      ref={containerRef}
       position="relative" 
       width={PIZZA_DIMENSIONS[size].size}
       height={PIZZA_DIMENSIONS[size].size}
       maxWidth={{ 
-        base: size === 'monster' ? "90vw" : size === 'medium' ? "60vw" : "30vw", 
+        base: size === 'monster' ? "65vw" : size === 'medium' ? "50vw" : "40vw", 
         md: "none" 
       }}
       aspectRatio="1/1"
       mx="auto"
+      as={motion.div}
+      initial={false}
+      animate={{ 
+        scale: 1,
+        opacity: 1
+      }}
+      exit={{ 
+        scale: 0.8,
+        opacity: 0
+      }}
+      transition={{
+        duration: 0.4,
+        ease: [0.4, 0, 0.2, 1]
+      }}
       sx={{
         '& > img': {
           objectFit: 'contain',

@@ -116,16 +116,17 @@ function App() {
 
           {/* Size Selection - All white when Monster selected */}
           <Stack 
-            spacing={4} 
+            spacing={{ base: 8, lg: 4 }} 
             position={{ base: "relative", lg: "fixed" }}
             bottom={{ base: "auto", lg: 8 }}
             left={{ base: "auto", lg: 8 }}
             zIndex={3}
             pb={{ base: 4, lg: 0 }}
-            px={{ base: 4, lg: 0 }}
+            px={{ base: 2, lg: 0 }}
             direction={{ base: "row", lg: "column" }}
-            justify={{ base: "space-between", lg: "flex-start" }}
+            justify={{ base: "center", lg: "flex-start" }}
             width={{ base: "100%", lg: "auto" }}
+            mx="auto"
           >
             <Heading
               cursor="pointer"
@@ -220,22 +221,35 @@ function App() {
           pr={0}
           width="fit-content"
           pb={24}
+          position="relative"
         >
-          <Heading 
-            color="pepperoni.900" 
-            fontSize={{ base: "3xl", md: "4xl" }}
-            width="fit-content"
-            textAlign="left"
-            py={8}
-            px={8}
+          <Box 
+            pt={8}
+            position="sticky"
+            top={0}
+            bg="white"
+            zIndex={2}
+            width="100%"
+            borderBottom="1px"
+            borderColor="gray.100"
           >
-            Choose Your Toppings
-          </Heading>
+            <Heading 
+              color="pepperoni.900" 
+              fontSize={{ base: "3xl", md: "4xl" }}
+              width="fit-content"
+              textAlign="left"
+              py={8}
+              px={8}
+            >
+              Choose Your Toppings
+            </Heading>
+          </Box>
 
           {/* Toppings List */}
           <Stack 
             spacing={2}
             width="fit-content"
+            pt={4}
           >
             {allToppings.map((topping) => {
               const isSelected = selectedToppings.find(t => t.title === topping.title);
