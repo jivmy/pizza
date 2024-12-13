@@ -28,6 +28,12 @@ function App() {
   const isMobile = () => window.innerWidth <= 768;
 
   useEffect(() => {
+    if (isMobile()) {
+      setSize('small');
+    }
+  }, []);
+
+  useEffect(() => {
     if (isMobile()) return;
     
     const audio = jazzAudioRef.current;
