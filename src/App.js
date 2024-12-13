@@ -221,35 +221,22 @@ function App() {
           pr={0}
           width="fit-content"
           pb={24}
-          position="relative"
         >
-          <Box 
-            pt={8}
-            position="sticky"
-            top={0}
-            bg="white"
-            zIndex={2}
-            width="100%"
-            borderBottom="1px"
-            borderColor="gray.100"
+          <Heading 
+            color="pepperoni.900" 
+            fontSize={{ base: "3xl", md: "4xl" }}
+            width="fit-content"
+            textAlign="left"
+            py={8}
+            px={8}
           >
-            <Heading 
-              color="pepperoni.900" 
-              fontSize={{ base: "3xl", md: "4xl" }}
-              width="fit-content"
-              textAlign="left"
-              py={8}
-              px={8}
-            >
-              Choose Your Toppings
-            </Heading>
-          </Box>
+            Choose Your Toppings
+          </Heading>
 
           {/* Toppings List */}
           <Stack 
             spacing={2}
             width="fit-content"
-            pt={4}
           >
             {allToppings.map((topping) => {
               const isSelected = selectedToppings.find(t => t.title === topping.title);

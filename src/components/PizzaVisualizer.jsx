@@ -52,7 +52,7 @@ function PizzaVisualizer({ size, toppings }) {
       width={PIZZA_DIMENSIONS[size].size}
       height={PIZZA_DIMENSIONS[size].size}
       maxWidth={{ 
-        base: size === 'monster' ? "65vw" : size === 'medium' ? "50vw" : "40vw", 
+        base: size === 'monster' ? "90vw" : size === 'medium' ? "60vw" : "30vw", 
         md: "none" 
       }}
       aspectRatio="1/1"
