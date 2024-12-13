@@ -107,6 +107,7 @@ function App() {
     <Flex 
       direction={{ base: 'column', lg: 'row' }} 
       minH="100vh"
+      overflow="hidden"
     >
       {/* Left Side - Fixed Pizza Section */}
       <Box 
@@ -117,6 +118,7 @@ function App() {
         left="0"
         top="0"
         transition="background-color 0.3s ease"
+        overflowX="hidden"
         sx={{
           ...(size === 'monster' && {
             animation: 'redPulse 8s ease-in-out infinite',
@@ -259,6 +261,7 @@ function App() {
         minH={{ base: '100vh', lg: 'auto' }}
         bg="white"
         position="relative"
+        overflowX="hidden"
       >
         {/* Header */}
         <Box
