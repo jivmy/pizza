@@ -33,7 +33,15 @@ function PizzaVisualizer({ size, toppings }) {
       position="relative" 
       width={PIZZA_DIMENSIONS[size].size}
       height={PIZZA_DIMENSIONS[size].size}
+      maxWidth={{ base: "90vw", md: "none" }}
+      aspectRatio="1/1"
       mx="auto"
+      sx={{
+        '& > img': {
+          objectFit: 'contain',
+          aspectRatio: '1/1'
+        }
+      }}
     >
       {/* Base Pizza */}
       <Image
@@ -42,6 +50,7 @@ function PizzaVisualizer({ size, toppings }) {
         alt="Pizza Base"
         width="100%"
         height="100%"
+        objectFit="contain"
         position="absolute"
         animate={{ 
           rotate: [0, -1, 1, -0.5, 0],

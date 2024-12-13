@@ -116,10 +116,15 @@ function App() {
           {/* Size Selection - All white when Monster selected */}
           <Stack 
             spacing={4} 
-            position="fixed"
-            bottom={8}
-            left={8}
+            position={{ base: "relative", lg: "fixed" }}
+            bottom={{ base: "auto", lg: 8 }}
+            left={{ base: "auto", lg: 8 }}
             zIndex={3}
+            pb={{ base: 8, lg: 0 }}
+            px={{ base: 8, lg: 0 }}
+            direction={{ base: "row", lg: "column" }}
+            justify={{ base: "space-between", lg: "flex-start" }}
+            width={{ base: "100%", lg: "auto" }}
           >
             <Heading
               cursor="pointer"
