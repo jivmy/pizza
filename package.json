@@ -2,6 +2,7 @@
   "name": "design-eng-takehome",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jivmy.github.io/pizza",
   "dependencies": {
     "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/react": "^2.10.4",
@@ -39,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
   }
 }
