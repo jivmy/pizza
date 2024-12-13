@@ -70,17 +70,17 @@ function App() {
         transition="background-color 0.3s ease"
       >
         <Stack 
-          spacing={8} 
+          spacing={{ base: 4, lg: 8 }} 
           h={{ base: 'auto', lg: 'full' }}
-          py={{ base: 4, lg: 8 }}
-          px={4}
+          py={{ base: 2, lg: 8 }}
+          px={{ base: 2, lg: 4 }}
           align="center"
         >
           <Image
             src={`./images/${size === 'monster' ? "logo_2.svg" : "logo.svg"}`}
             alt="Pepperoni Planet Logo"
             mx="auto"
-            w="32"
+            w={{ base: "24", lg: "32" }}
             filter={size === 'monster' ? "brightness(0) invert(1)" : "none"}
             transition="all 0.2s ease"
           />
@@ -93,8 +93,9 @@ function App() {
             justifyContent="center"
             width="100%"
             position="relative"
-            px={8}
-            height="100%"
+            px={{ base: 2, lg: 8 }}
+            height={{ base: "auto", lg: "100%" }}
+            py={{ base: 2, lg: 4 }}
           >
             <Box 
               width="100%"
@@ -120,8 +121,8 @@ function App() {
             bottom={{ base: "auto", lg: 8 }}
             left={{ base: "auto", lg: 8 }}
             zIndex={3}
-            pb={{ base: 8, lg: 0 }}
-            px={{ base: 8, lg: 0 }}
+            pb={{ base: 4, lg: 0 }}
+            px={{ base: 4, lg: 0 }}
             direction={{ base: "row", lg: "column" }}
             justify={{ base: "space-between", lg: "flex-start" }}
             width={{ base: "100%", lg: "auto" }}
