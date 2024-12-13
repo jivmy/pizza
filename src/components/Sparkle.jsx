@@ -25,44 +25,11 @@ const Sparkle = ({ isVisible }) => {
   return (
     <AnimatePresence>
       {isVisible && (
-        <Box
-          position="fixed"
-          top={0}
-          left={0}
-          right={0}
-          bottom={0}
-          pointerEvents="none"
-          zIndex={9999}
-        >
+        <Box>
           {confetti.map((piece) => (
-            <motion.div
-              key={piece.id}
-              initial={{ 
-                x: `${piece.x}vw`,
-                y: `${piece.y}vh`,
-                scale: 0,
-                rotate: 0,
-                opacity: 0
-              }}
-              animate={{ 
-                x: [`${piece.x}vw`, `${piece.x + (Math.random() * 80 - 40)}vw`], // Wider spread
-                y: [`${piece.y}vh`, `${piece.y + (Math.random() * 80 - 40)}vh`], // Wider spread
-                scale: [0, piece.scale, piece.scale * 1.2, 0],
-                rotate: [0, piece.rotation * 2], // More rotation
-                opacity: [0, 1, 1, 0]
-              }}
-              transition={{
-                duration: piece.duration,
-                delay: piece.delay,
-                ease: "easeOut"
-              }}
-              style={{
-                position: 'absolute',
-                filter: 'saturate(150%)'
-              }}
-            >
+            <motion.div key={piece.id}>
               <Image
-                src="/images/mascot.png"
+                src={`${process.env.PUBLIC_URL}/images/mascot.png`}
                 alt="Peppy"
                 w="12"
                 h="12"

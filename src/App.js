@@ -40,8 +40,7 @@ function App() {
   };
 
   const handleFinish = () => {
-    setSparkleVisible(true);
-    setTimeout(() => setSparkleVisible(false), 2000);
+    // Empty function now, or you can add different functionality here if needed
   };
 
   return (
@@ -234,10 +233,10 @@ function App() {
                   _hover={{ bg: 'transparent' }}
                 >
                   <Image 
-                    src={`/images/${topping.filename}`} 
+                    src={`/images/${topping.filename}`}
                     alt={topping.title}
-                    w="16"
-                    h="16"
+                    width="64px"
+                    height="64px"
                     transition="all 0.3s ease"
                     transform={isSelected ? "scale(1.6)" : "scale(1)"}
                   />
@@ -309,7 +308,6 @@ function App() {
           </Button>
         </Box>
       </Box>
-      <Sparkle isVisible={sparkleVisible} />
     </Flex>
   );
 }

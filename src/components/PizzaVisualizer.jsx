@@ -107,7 +107,7 @@ function PizzaVisualizer({ size, toppings }) {
                 transform={`translate(-50%, -50%) rotate(${pos.rotate}deg)`}
               >
                 <Image
-                  src={`/images/${topping.filename}`}
+                  src={`${process.env.PUBLIC_URL}/images/${topping.filename}`}
                   alt={topping.title}
                   width="64px"
                   height="64px"
