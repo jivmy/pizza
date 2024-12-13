@@ -256,7 +256,7 @@ function App() {
                     color="pepperoni.600"
                     display="flex"
                     alignItems="center"
-                    fontWeight={isSelected ? "semibold" : "normal"}
+                    fontWeight={isSelected ? "bold  " : "thin"}
                   >
                     {topping.title}
                   </Heading>
