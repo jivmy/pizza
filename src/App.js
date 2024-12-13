@@ -114,7 +114,13 @@ function App() {
           </Box>
 
           {/* Size Selection - All white when Monster selected */}
-          <HStack spacing={8} pb={8} pl={1}>
+          <Stack 
+            spacing={4} 
+            position="fixed"
+            bottom={8}
+            left={8}
+            zIndex={3}
+          >
             <Heading
               cursor="pointer"
               fontSize={{ base: "lg", md: "xl" }}
@@ -172,11 +178,10 @@ function App() {
                 scale: 1,
                 rotate: 0
               }}
-              
             >
               MONSTER
             </Heading>
-          </HStack>
+          </Stack>
         </Stack>
       </Box>
 
