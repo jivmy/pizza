@@ -112,6 +112,17 @@ function App() {
         left="0"
         top="0"
         transition="background-color 0.3s ease"
+        sx={{
+          ...(size === 'monster' && {
+            animation: 'redPulse 8s ease-in-out infinite',
+            '@keyframes redPulse': {
+              '0%': { backgroundColor: 'var(--chakra-colors-pepperoni-600)' },
+              '33%': { backgroundColor: 'var(--chakra-colors-pepperoni-700)' },
+              '66%': { backgroundColor: 'var(--chakra-colors-pepperoni-500)' },
+              '100%': { backgroundColor: 'var(--chakra-colors-pepperoni-600)' }
+            }
+          })
+        }}
       >
         <Stack 
           spacing={{ base: 4, lg: 8 }} 
