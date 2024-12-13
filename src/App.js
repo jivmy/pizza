@@ -178,7 +178,7 @@ function App() {
 
           {/* Size Selection - All white when Monster selected */}
           <Stack 
-            spacing={{ base: 8, lg: 4 }} 
+            spacing={{ base: 4, lg: 4 }}
             position={{ base: "relative", lg: "fixed" }}
             bottom={{ base: "auto", lg: 8 }}
             left={{ base: "auto", lg: 8 }}
@@ -350,7 +350,7 @@ function App() {
           justifyContent="center"
           gap={4}
           alignItems="center"
-          zIndex={2}
+          zIndex={9999}
         >
           <Button
             variant="ghost"
