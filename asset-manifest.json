@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/pizza/static/js/main.03be7ebf.js",
+    "index.html": "/pizza/index.html",
+    "main.03be7ebf.js.map": "/pizza/static/js/main.03be7ebf.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.03be7ebf.js"
+  ]
+}
