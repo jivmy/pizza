@@ -194,49 +194,43 @@ function App() {
 
       {/* Right Side - Scrollable Content */}
       <Box 
-        w={{ base: '100%', lg: 'fit-content' }}
+        w={{ base: '100%', lg: '33%' }}
         ml={{ base: 0, lg: '67%' }}
         minH={{ base: '100vh', lg: 'auto' }}
         bg="white"
         position="relative"
-        sx={{
-          scrollBehavior: 'smooth',
-          '&::-webkit-scrollbar': {
-            width: '10px',
-          },
-          '&::-webkit-scrollbar-track': {
-            background: '#f1f1f1',
-          },
-          '&::-webkit-scrollbar-thumb': {
-            background: '#888',
-            borderRadius: '5px',
-          },
-          '&::-webkit-scrollbar-thumb:hover': {
-            background: '#555',
-          },
-        }}
       >
-        <Stack 
-          spacing={0} 
-          pr={0}
-          width="fit-content"
-          pb={24}
+        {/* Header */}
+        <Box
+          position="sticky"
+          top={0}
+          bg="white"
+          zIndex={10}
+          borderBottom="1px solid"
+          borderColor="gray.100"
         >
           <Heading 
             color="pepperoni.900" 
             fontSize={{ base: "3xl", md: "4xl" }}
-            width="fit-content"
-            textAlign="left"
             py={8}
-            px={8}
+            pl={8}
           >
             Choose Your Toppings
           </Heading>
+        </Box>
 
-          {/* Toppings List */}
+        {/* Toppings List */}
+        <Stack 
+          spacing={0} 
+          width="100%"
+          pb={24}
+          position="relative"
+        >
           <Stack 
             spacing={2}
-            width="fit-content"
+            width="100%"
+            pt={4}
+            pl={8}
           >
             {allToppings.map((topping) => {
               const isSelected = selectedToppings.find(t => t.title === topping.title);
