@@ -25,7 +25,11 @@ function App() {
   const toast = useToast();
   const jazzAudioRef = useRef(new Audio('/sounds/jazz.mp3'));
 
+  const isMobile = () => window.innerWidth <= 768;
+
   useEffect(() => {
+    if (isMobile()) return;
+    
     const audio = jazzAudioRef.current;
     audio.loop = true;
     audio.volume = 0.3;
@@ -46,6 +50,7 @@ function App() {
   const allToppings = data.categories.toppings.items;
 
   const playSound = (soundName) => {
+    if (isMobile()) return;
     const audio = new Audio(`/sounds/Low Volume -20dB/Buttons and Navigation/${soundName}`);
     audio.volume = 0.3;
     audio.play().catch(error => console.log('Error playing sound:', error));
@@ -149,7 +154,7 @@ function App() {
             width="100%"
             position="relative"
             px={{ base: 2, lg: 8 }}
-            height={{ base: "auto", lg: "100%" }}
+            height="100%"
             py={{ base: 2, lg: 4 }}
           >
             <Box 
