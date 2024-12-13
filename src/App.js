@@ -114,7 +114,7 @@ function App() {
         w={{ base: '100%', lg: '67%' }}
         bg={size === 'monster' ? "pepperoni.600" : "starlight.100"}
         position={{ base: 'relative', lg: 'fixed' }}
-        h={{ base: 'fit-content', lg: '100vh' }}
+        h={{ base: 'min(60vh, fit-content)', lg: '100vh' }}
         left="0"
         top="0"
         transition="background-color 0.3s ease"
