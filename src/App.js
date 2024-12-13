@@ -64,15 +64,15 @@ function App() {
         w={{ base: '100%', lg: '67%' }}
         bg={size === 'monster' ? "pepperoni.600" : "starlight.100"}
         position={{ base: 'relative', lg: 'fixed' }}
-        h={{ base: 'auto', lg: '100vh' }}
+        h={{ base: 'fit-content', lg: '100vh' }}
         left="0"
         top="0"
         transition="background-color 0.3s ease"
       >
         <Stack 
           spacing={8} 
-          h="full" 
-          py={8}
+          h={{ base: 'auto', lg: 'full' }}
+          py={{ base: 4, lg: 8 }}
           px={4}
           align="center"
         >
