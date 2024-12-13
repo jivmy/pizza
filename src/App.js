@@ -88,19 +88,20 @@ function App() {
     if (isDone) {
       setIsDone(false);
       setConfetti([]);
-    } else {
-      setIsDone(true);
-      const newConfetti = Array.from({ length: 30 }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        startY: -10,
-        endY: 110,
-        wobble: Math.random() * 40 - 20,
-        delay: i * 0.1,
-        duration: 2 + Math.random()
-      }));
-      setConfetti(newConfetti);
+      return;
     }
+    
+    setIsDone(true);
+    const newConfetti = Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      startY: -10,
+      endY: 110,
+      wobble: Math.random() * 40 - 20,
+      delay: i * 0.1,
+      duration: 2 + Math.random()
+    }));
+    setConfetti(newConfetti);
   };
 
   return (
