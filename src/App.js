@@ -124,7 +124,7 @@ function App() {
         h={{ base: 'min(60vh, fit-content)', lg: '100vh' }}
         left="0"
         top="0"
-        transition="background-color 0.3s ease"
+        transition="all 0.5s ease"
         overflowX="hidden"
         sx={{
           ...(size === 'monster' && {
