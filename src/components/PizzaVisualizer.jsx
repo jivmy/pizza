@@ -38,7 +38,7 @@ function PizzaVisualizer({ size, toppings }) {
       {/* Base Pizza */}
       <Image
         as={motion.img}
-        src="/images/pizza_7.png"
+        src="./images/pizza_7.png"
         alt="Pizza Base"
         width="100%"
         height="100%"
@@ -68,7 +68,7 @@ function PizzaVisualizer({ size, toppings }) {
         }}
       />
 
-      {/* Mask and Toppings Container */}
+      {/* Toppings Container */}
       <Box
         position="absolute"
         top="0"
@@ -96,7 +96,6 @@ function PizzaVisualizer({ size, toppings }) {
           transform={`scale(${scale})`}
           transformOrigin="top left"
         >
-          {/* Toppings */}
           {toppings.map((topping) => 
             (toppingPositionsRef.current[topping.title] || []).map((pos, index) => (
               <Box
@@ -107,7 +106,7 @@ function PizzaVisualizer({ size, toppings }) {
                 transform={`translate(-50%, -50%) rotate(${pos.rotate}deg)`}
               >
                 <Image
-                  src={`${process.env.PUBLIC_URL}/images/${topping.filename}`}
+                  src={`./images/${topping.filename}`}
                   alt={topping.title}
                   width="64px"
                   height="64px"

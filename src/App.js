@@ -13,14 +13,15 @@ import {
 import React, { useState } from 'react';
 import { data } from './data';
 import PizzaVisualizer from './components/PizzaVisualizer';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { RepeatIcon } from '@chakra-ui/icons';
-import Sparkle from './components/Sparkle';
+import { useToast } from '@chakra-ui/react';
 
 function App() {
   const [size, setSize] = useState('medium');
   const [selectedToppings, setSelectedToppings] = useState([]);
-  const [sparkleVisible, setSparkleVisible] = useState(false);
+  const [confetti, setConfetti] = useState([]);
+  const toast = useToast();
 
   const allToppings = data.categories.toppings.items;
 
@@ -37,10 +38,20 @@ function App() {
   const handleReset = () => {
     setSize('medium');
     setSelectedToppings([]);
+    setConfetti([]);
   };
 
   const handleFinish = () => {
-    // Empty function now, or you can add different functionality here if needed
+    const newConfetti = Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      startY: -10,
+      endY: 110,
+      wobble: Math.random() * 40 - 20,
+      delay: i * 0.1,
+      duration: 2 + Math.random()
+    }));
+    setConfetti(newConfetti);
   };
 
   return (
@@ -66,7 +77,7 @@ function App() {
           align="center"
         >
           <Image
-            src={size === 'monster' ? "/images/logo_2.svg" : "/images/logo.svg"}
+            src={`./images/${size === 'monster' ? "logo_2.svg" : "logo.svg"}`}
             alt="Pepperoni Planet Logo"
             mx="auto"
             w="32"
@@ -233,10 +244,10 @@ function App() {
                   _hover={{ bg: 'transparent' }}
                 >
                   <Image 
-                    src={`/images/${topping.filename}`}
+                    src={`./images/${topping.filename}`}
                     alt={topping.title}
-                    width="64px"
-                    height="64px"
+                    w="16"
+                    h="16"
                     transition="all 0.3s ease"
                     transform={isSelected ? "scale(1.6)" : "scale(1)"}
                   />
@@ -308,6 +319,54 @@ function App() {
           </Button>
         </Box>
       </Box>
+
+      <AnimatePresence>
+        {confetti.map((piece) => (
+          <motion.div
+            key={piece.id}
+            initial={{ 
+              x: `${piece.x}vw`,
+              y: `${piece.startY}vh`,
+              rotate: 0,
+              opacity: 1
+            }}
+            animate={{ 
+              x: [`${piece.x}vw`, `${piece.x + piece.wobble}vw`, `${piece.x}vw`],
+              y: `${piece.endY}vh`,
+              rotate: [0, 360, 720],
+              opacity: 1
+            }}
+            transition={{
+              duration: piece.duration,
+              delay: piece.delay,
+              ease: "linear",
+              x: {
+                duration: piece.duration,
+                repeat: Infinity,
+                ease: "easeInOut"
+              },
+              y: {
+                duration: piece.duration,
+                repeat: Infinity,
+                ease: "linear"
+              },
+              rotate: {
+                duration: piece.duration,
+                repeat: Infinity,
+                ease: "linear"
+              }
+            }}
+            style={{ position: 'fixed', zIndex: 9999, pointerEvents: 'none' }}
+          >
+            <Image
+              src="/images/mascot.png"
+              alt="confetti"
+              w="8"
+              h="8"
+            />
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </Flex>
   );
 }
