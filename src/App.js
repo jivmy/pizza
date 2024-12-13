@@ -154,6 +154,13 @@ function App() {
             filter={size === 'monster' ? "brightness(0) invert(1)" : "none"}
             transition="all 0.2s ease"
             objectFit="contain"
+            quality={100}
+            loading="eager"
+            draggable={false}
+            style={{ 
+              imageRendering: '-webkit-optimize-contrast',
+              transform: 'translateZ(0)',
+            }}
           />
           
           {/* Pizza Visualizer - With overflow visible */}
