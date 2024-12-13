@@ -15,7 +15,7 @@ const getRandomPosition = (maxRadius, isMobile) => {
   };
 };
 
-function PizzaVisualizer({ size, toppings }) {
+function PizzaVisualizer({ size, toppings, isPepperoniStopped }) {
   const scale = PIZZA_DIMENSIONS[size].scale;
   const toppingPositionsRef = useRef({});
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -52,7 +52,7 @@ function PizzaVisualizer({ size, toppings }) {
       width={PIZZA_DIMENSIONS[size].size}
       height={PIZZA_DIMENSIONS[size].size}
       maxWidth={{ 
-        base: size === 'monster' ? "90vw" : size === 'medium' ? "60vw" : "30vw", 
+        base: size === 'monster' ? "75vw" : size === 'medium' ? "45vw" : "35vw", 
         md: "none" 
       }}
       aspectRatio="1/1"
@@ -60,12 +60,7 @@ function PizzaVisualizer({ size, toppings }) {
       as={motion.div}
       initial={false}
       animate={{ 
-        scale: 1,
         opacity: 1
-      }}
-      exit={{ 
-        scale: 0.8,
-        opacity: 0
       }}
       transition={{
         duration: 0.4,
@@ -80,6 +75,7 @@ function PizzaVisualizer({ size, toppings }) {
     >
       {/* Base Pizza */}
       <Image
+        key={size}
         as={motion.img}
         src="./images/pizza_7.png"
         alt="Pizza Base"
@@ -87,24 +83,8 @@ function PizzaVisualizer({ size, toppings }) {
         height="100%"
         objectFit="contain"
         position="absolute"
-        animate={{ 
-          rotate: [0, -1, 1, -0.5, 0],
-          x: [0, -1, 1, -0.5, 0]
-        }}
-        transition={{ 
-          rotate: {
-            duration: 0.2,
-            ease: "easeInOut"
-          },
-          x: {
-            duration: 0.2,
-            ease: "easeInOut"
-          }
-        }}
         sx={{
-          transform: size === PIZZA_SIZES.MONSTER ? 
-            `rotate(${Date.now() % 360}deg)` : 'none',
-          animation: size === PIZZA_SIZES.MONSTER ? 'spin 30s linear infinite' : 'none',
+          animation: size === PIZZA_SIZES.MONSTER && !isPepperoniStopped ? 'spin 30s linear infinite' : 'none',
           '@keyframes spin': {
             'from': { transform: 'rotate(0deg)' },
             'to': { transform: 'rotate(360deg)' }
@@ -114,6 +94,8 @@ function PizzaVisualizer({ size, toppings }) {
 
       {/* Toppings Container */}
       <Box
+        key={`toppings-${size}`}
+        as={motion.div}
         position="absolute"
         top="0"
         left="0"
@@ -124,7 +106,7 @@ function PizzaVisualizer({ size, toppings }) {
         overflow="hidden"
         zIndex={1}
         sx={{
-          animation: size === 'monster' ? 'spin 30s linear infinite' : 'none',
+          animation: size === 'monster' && !isPepperoniStopped ? 'spin 30s linear infinite' : 'none',
           '@keyframes spin': {
             'from': { transform: `scale(${scale}) rotate(0deg)` },
             'to': { transform: `scale(${scale}) rotate(360deg)` }

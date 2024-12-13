@@ -10,7 +10,7 @@ import {
   SimpleGrid,
   Flex,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { data } from './data';
 import PizzaVisualizer from './components/PizzaVisualizer';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,37 +21,81 @@ function App() {
   const [size, setSize] = useState('medium');
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [confetti, setConfetti] = useState([]);
+  const [isDone, setIsDone] = useState(false);
   const toast = useToast();
+  const jazzAudioRef = useRef(new Audio('/sounds/jazz.mp3'));
+
+  useEffect(() => {
+    const audio = jazzAudioRef.current;
+    audio.loop = true;
+    audio.volume = 0.3;
+
+    if (size === 'monster') {
+      audio.play().catch(error => console.log('Error playing jazz:', error));
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [size]);
 
   const allToppings = data.categories.toppings.items;
+
+  const playSound = (soundName) => {
+    const audio = new Audio(`/sounds/Low Volume -20dB/Buttons and Navigation/${soundName}`);
+    audio.volume = 0.3;
+    audio.play().catch(error => console.log('Error playing sound:', error));
+  };
 
   const handleToppingToggle = (topping) => {
     setSelectedToppings(prev => {
       const exists = prev.find(t => t.title === topping.title);
       if (exists) {
+        playSound('Collapse.m4a');
         return prev.filter(t => t.title !== topping.title);
       }
+      playSound('Expand.m4a');
       return [...prev, topping];
     });
   };
 
+  const handleSizeChange = (newSize) => {
+    playSound('Button 5.m4a');
+    if (newSize === 'monster') {
+      playSound('Tab 3.m4a');
+    }
+    setSize(newSize);
+  };
+
   const handleReset = () => {
+    playSound('Button 4.m4a');
     setSize('medium');
     setSelectedToppings([]);
     setConfetti([]);
   };
 
   const handleFinish = () => {
-    const newConfetti = Array.from({ length: 30 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      startY: -10,
-      endY: 110,
-      wobble: Math.random() * 40 - 20,
-      delay: i * 0.1,
-      duration: 2 + Math.random()
-    }));
-    setConfetti(newConfetti);
+    playSound('Tab 2.m4a');
+    if (isDone) {
+      setIsDone(false);
+      setConfetti([]);
+    } else {
+      setIsDone(true);
+      const newConfetti = Array.from({ length: 30 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        startY: -10,
+        endY: 110,
+        wobble: Math.random() * 40 - 20,
+        delay: i * 0.1,
+        duration: 2 + Math.random()
+      }));
+      setConfetti(newConfetti);
+    }
   };
 
   return (
@@ -137,7 +181,7 @@ function App() {
                 : (size === 'small' ? "pepperoni.600" : "pepperoni.200")
               }
               textTransform="capitalize"
-              onClick={() => setSize('small')}
+              onClick={() => handleSizeChange('small')}
               _hover={{ 
                 color: size === 'monster' ? "white" : "pepperoni.400",
                 transform: "scale(1.1)"
@@ -156,7 +200,7 @@ function App() {
                 : (size === 'medium' ? "pepperoni.600" : "pepperoni.200")
               }
               textTransform="capitalize"
-              onClick={() => setSize('medium')}
+              onClick={() => handleSizeChange('medium')}
               _hover={{ 
                 color: size === 'monster' ? "white" : "pepperoni.400",
                 transform: "scale(1.1)"
@@ -173,7 +217,7 @@ function App() {
               fontWeight="800"
               color={size === 'monster' ? "white" : "pepperoni.200"}
               textTransform="uppercase"
-              onClick={() => setSize('monster')}
+              onClick={() => handleSizeChange('monster')}
               _hover={{ 
                 color: size === 'monster' ? "white" : "pepperoni.400"
               }}
@@ -215,7 +259,7 @@ function App() {
             py={8}
             pl={8}
           >
-            Choose Your Toppings
+            Toppings
           </Heading>
         </Box>
 
@@ -303,9 +347,10 @@ function App() {
             />
           </Button>
           <Button
-            variant="outline"
+            variant={isDone ? "solid" : "outline"}
+            bg={isDone ? "pepperoni.600" : "transparent"}
             borderColor="pepperoni.600"
-            color="pepperoni.600"
+            color={isDone ? "white" : "pepperoni.600"}
             onClick={handleFinish}
             px={8}
             py={6}
@@ -315,13 +360,13 @@ function App() {
             flex="1"
             borderWidth="3px"
             _hover={{ 
-              bg: 'pepperoni.600',
+              bg: isDone ? 'pepperoni.700' : 'pepperoni.600',
               color: 'white',
               borderColor: 'pepperoni.600'
             }}
             transition="all 0.2s"
           >
-            Done
+            {isDone ? "EAT PEPPERONI" : "Done"}
           </Button>
         </Box>
       </Box>
@@ -334,13 +379,15 @@ function App() {
               x: `${piece.x}vw`,
               y: `${piece.startY}vh`,
               rotate: 0,
-              opacity: 1
+              opacity: 1,
+              scale: 1
             }}
             animate={{ 
               x: [`${piece.x}vw`, `${piece.x + piece.wobble}vw`, `${piece.x}vw`],
               y: `${piece.endY}vh`,
               rotate: [0, 360, 720],
-              opacity: 1
+              opacity: isDone ? 1 : [1, 0],
+              scale: isDone ? 1 : [1, 0]
             }}
             transition={{
               duration: piece.duration,
@@ -360,6 +407,14 @@ function App() {
                 duration: piece.duration,
                 repeat: Infinity,
                 ease: "linear"
+              },
+              opacity: {
+                duration: 0.3,
+                ease: "easeOut"
+              },
+              scale: {
+                duration: 0.3,
+                ease: "easeOut"
               }
             }}
             style={{ position: 'fixed', zIndex: 9999, pointerEvents: 'none' }}
